@@ -11,6 +11,7 @@ import './App.css';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import Register from './components/auth/Register';
 
 const theme = createTheme({
   palette: {
@@ -39,6 +40,7 @@ const App = () => {
           <Route path="/" element={<PostList />} />
           <Route path="/new-post" element={<NewPostForm />} />
           <Route path="/post/:id" element={<PostDetail />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
         <Footer />
       </Router>
