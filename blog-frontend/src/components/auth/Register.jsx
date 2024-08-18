@@ -17,17 +17,16 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        try {
-            axiosInstance.post('/register', formData);
-            alert('Registration successful!');
-            formData.name = '';
-            formData.email = '';
-            formData.password = '';
-            formData.password_confirmation = '';
-
-        } catch (error) {
-            console.error('Registration failed', error);
-        }
+        axiosInstance.post('/register', formData)
+            .then(response => {
+                console.log(response.data);
+                alert('Registration successful!');
+                formData.name = '';
+                formData.email = '';
+                formData.password = '';
+                formData.password_confirmation = '';
+            })
+            .catch(error => console.error(error));
     };
 
     return (

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import axiosInstance from './axios';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -12,6 +13,7 @@ import './App.css';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Register from './components/auth/Register';
+import Login from './components/auth/Login';
 
 const theme = createTheme({
   palette: {
@@ -25,22 +27,27 @@ const theme = createTheme({
 });
 
 const App = () => {
-  // const [posts, setPosts] = useState([]);
+  const [user, setUser] = useState(null);
 
-  // const addPost = (post) => {
-  //   setPosts([...posts, { ...post, id: posts.length + 1 }]);
-  // };
+  useEffect(() => {
+
+    // const user = axiosInstance.get('/user')
+    //   .then(response => setUser(response.data))
+    //   .catch(() => setUser(null));
+    // console.log("user = " , user);
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
-        <Header />
+        <Header user={user} />
         <Routes>
           <Route path="/" element={<PostList />} />
           <Route path="/new-post" element={<NewPostForm />} />
           <Route path="/post/:id" element={<PostDetail />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
         <Footer />
       </Router>

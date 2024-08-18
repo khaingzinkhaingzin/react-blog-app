@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-    baseURL: 'http://blog-backend.test/api',
+    baseURL: 'https://blog-backend.test/api',
     headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
     },
-    withCredentials: true,  
 });
 
 export default axiosInstance;

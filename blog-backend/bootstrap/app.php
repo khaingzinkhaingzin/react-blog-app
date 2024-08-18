@@ -11,7 +11,10 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-    ->withMiddleware(new \App\Http\ApiMiddleware())
+    // ->withMiddleware(new \App\Http\ApiMiddleware())
+    ->withMiddleware(function (Middleware $middleware) {
+        $middleware->statefulApi();
+    })
     ->withExceptions(function (Exceptions $exceptions) {
         //  
     })->create();

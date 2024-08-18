@@ -10,13 +10,13 @@ use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
-    public function register(Request $request) {
+    public function register(Request $request) 
+    {
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
-    
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -26,24 +26,32 @@ class UserController extends Controller
         return $user;
     }
 
-    public function login(Request $request) {
+    public function login(Request $request) 
+    {
         $request->validate([
             'email' => 'required|string|email',
             'password' => 'required|string',
         ]);
-    
+
         if (!Auth::attempt($request->only('email', 'password'))) {
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect.'],
             ]);
         }
-    
-        return $request->user();
+
+        return auth()->user();
+        // return $request->user();
     }
 
-    public function logout(Request $request) {
+    public function logout(Request $request) 
+    {
         $request->user()->currentAccessToken()->delete();
     
         return response()->json(['message' => 'Logged out successfully'], 200);
+    }
+
+    public function getUser()
+    {
+        return auth()->user();
     }
 }
