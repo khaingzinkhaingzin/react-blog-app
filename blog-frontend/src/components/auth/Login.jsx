@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { TextField, Button, Container, Typography } from '@mui/material';
 import axios from 'axios';
@@ -33,22 +33,13 @@ const Login = () => {
                 withCredentials: true,
                 withXSRFToken: true,
             }
-        );
-        
-    };
-
-    const getUser = async (e) => {
-        e.preventDefault();
-
-        await axios.get('http://localhost:8000/api/user', 
-            {
-                headers: {
-                    Accept: 'application/json'
-                },
-                withCredentials: true,
-                withXSRFToken: true,
-            }
-        );
+        )
+        .then(() => {
+            navigate('/');
+        })
+        .catch((error) => {
+            setError(error.message);
+        });
         
     };
 
@@ -76,11 +67,12 @@ const Login = () => {
                     type="submit"
                     variant="contained"
                     color="primary"
+                    sx={{px: 10, my: 2}}
                 >
                     Login
                 </Button>
             </form>
-            <Button onClick={getUser}>Get User</Button>
+            Don't have an account yet? <Typography component={Link} to="/register" sx={{color: 'blue'}}>Create an account</Typography>
         </Container>
     );
 };

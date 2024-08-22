@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import axiosInstance from './axios';
+import axios from 'axios';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -30,11 +31,13 @@ const App = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-
-    // const user = axiosInstance.get('/user')
-    //   .then(response => setUser(response.data))
-    //   .catch(() => setUser(null));
-    // console.log("user = " , user);
+    axiosInstance.get('/user')
+      .then(response => {
+        setUser(response.data);
+      })
+      .catch(error => {
+        setUser(null);
+      });
   }, []);
 
   return (

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Button, Container, Typography } from '@mui/material';
 import axiosInstance from '../../axios';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -67,10 +68,11 @@ const Register = () => {
                     onChange={handleChange}
                 />
 
-                <Button type="submit" variant="contained" color="primary">
+                <Button type="submit" variant="contained" color="primary" sx={{px: 10, my: 2}}>
                     Register
                 </Button>
             </form>
+            Already have an account. <Typography component={Link} to="/login" sx={{color: 'blue'}}>Login</Typography>
         </Container>
     );
 }

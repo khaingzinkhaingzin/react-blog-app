@@ -45,7 +45,8 @@ class UserController extends Controller
 
     public function logout(Request $request) 
     {
-        $request->user()->currentAccessToken()->delete();
+        Auth::guard('web')->logout(); // Logs out the user
+        $request->session()->invalidate(); // Ends the session on server side
     
         return response()->json(['message' => 'Logged out successfully'], 200);
     }
